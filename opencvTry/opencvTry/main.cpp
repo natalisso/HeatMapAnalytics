@@ -59,8 +59,10 @@ void Chess::drawTrackingPath(Mat& imageDraw, int id, vector<Chess>& chessPieces)
 	}
 
 	for (int i = 1; i < vectorSize; i++) {
-		cv::line(imageDraw, chessPieces[id].trackingPoints[i - 1], chessPieces[id].trackingPoints[i], cv::Scalar(B, G, R), 2, LINE_AA, 0);
-		if (i == vectorSize - 1)
+		line(imageDraw, chessPieces[id].trackingPoints[i - 1], chessPieces[id].trackingPoints[i], Scalar(B, G, R), 2, LINE_AA, 0);
+		if (i == 1)
+			circle(imageDraw, chessPieces[id].trackingPoints[i - 1], 4, Scalar(B, G, R), 4, LINE_AA, 0);
+		else if (i == vectorSize - 1)
 			putText(imageDraw, "End", chessPieces[id].trackingPoints[i], font, fontScale, cv::Scalar(0, 0, 255), thickness, LINE_AA);
 	}
 }
