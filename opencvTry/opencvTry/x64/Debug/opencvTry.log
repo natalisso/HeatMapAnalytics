@@ -1,4 +1,6 @@
 ﻿  main.cpp
-c:\users\natal\onedrive\documents\github\selecaovoxar\opencvtry\opencvtry\main.cpp(181): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: consulte a declaração de 'scanf'
+c:\users\natal\onedrive\documents\github\selecaovoxar\opencvtry\opencvtry\main.cpp(46): warning C4244: 'inicializando': conversão de 'double' para 'int', possível perda de dados
+c:\users\natal\onedrive\documents\github\selecaovoxar\opencvtry\opencvtry\main.cpp(157): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: consulte a declaração de 'strcpy'
+c:\users\natal\onedrive\documents\github\selecaovoxar\opencvtry\opencvtry\main.cpp(170): warning C4244: 'inicializando': conversão de 'double' para 'int', possível perda de dados
   opencvTry.vcxproj -> C:\Users\natal\OneDrive\Documents\GitHub\selecaoVoxar\opencvTry\x64\Debug\opencvTry.exe
