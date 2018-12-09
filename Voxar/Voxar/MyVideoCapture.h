@@ -11,20 +11,18 @@ using namespace cv;
 class MyVideoCapture
 {
 public:
-	Mat frame, initialFrame;
+	Mat frame;
 	VideoCapture inputVideo;
 	clock_t startTime;
 	double fps, frameCounter, totalTime;
 	int source;
-	bool stop;
+	bool stop;			// Uma variável de parada para comunicação com a main
 
 	MyVideoCapture(int sourceOption);
-	void getInitialFrame();
-	void getFrame();
-	void showFrame();
-	void beginTimer();
-	void updateFPS();
-	void printFPS(Mat& image);
+	void getFrame();					// Captura um frame e da o release na captura quando o loop na main para
+	void beginTimer();					// Inicial o tempo
+	void updateFPS();					// Incrementa a quantidade de frames capturados, o tempo total de execução e o a quantidade de fps
+	void printFPS(Mat& image);			// Imprime no frame atual o fps 
 };
 
 

@@ -2,43 +2,51 @@
 #include "MyChessPiece.h"
 #include "MyMarkers.h"
 
-void printBoardScale(Mat& image);
-void endGame(Mat& imageBackground, vector<MyChessPiece>& chessPieces);
+void printBoardScale(Mat& image);											// Imprime a identificação das linhas e colunas do tabuleiro
+void endGame(Mat& imageBackground, vector<MyChessPiece>& chessPieces);		// Gera as imagens com o heat map de todas as peças
 
 int main() {
 	MyMarkers markers = MyMarkers();
-	Mat backgroundFrame; 
-	int initImage = 1;
-
+	// Inicialização das peças 
 	vector<MyChessPiece> chessPieces;
 	for (int i = 0; i < 32; i++) {
 		chessPieces.push_back(MyChessPiece(i));
 	}
 	
+	// Inicializa a captura dos frames e o timer
 	MyVideoCapture videoGet = MyVideoCapture(1);
+	Mat initialFrame;
+	int initFrame = 1;
 	videoGet.beginTimer();
+
 	while (!videoGet.stop) {	
+		// Captura um novo frame e atualiza as variáveis para o fps
 		videoGet.getFrame();
 		videoGet.updateFPS();
 
-		detectMarkers(videoGet.frame, markers.markerDictionary, markers.corners, markers.ids);
-		if (markers.ids.size() > 0) {
-			markers.drawMyMarkers(videoGet.frame, chessPieces);
+		// Detecta e desenha os marcadores presentes no frame atual
+		markers.detectMyMarkers(videoGet.frame, chessPieces);
+
+		// Imprime a escala de linhas e colunas no frame atual
+		printBoardScale(videoGet.frame);
+
+		// Guarda o frame inicial com os desenhos dos marcadores
+		if (initFrame) {
+			videoGet.frame.copyTo(initialFrame);
+			initFrame = 0;
 		}
 
-		if (initImage) {
-			videoGet.frame.copyTo(backgroundFrame);
-			initImage = 0;
-		}
+		// Imprime o fps no frame atual e mostrá-o na tela
 		videoGet.printFPS(videoGet.frame);
-		printBoardScale(videoGet.frame);
 		imshow("Output", videoGet.frame);
 
+		// delay de 30 milissegundos e verifica se o ESC foi pressionado 
 		char key = (char)waitKey(30);
 		if (key == 27) {
+			// Release na captura de tela e gera as imagens finais com os heat maps
 			videoGet.stop = true;
 			videoGet.getFrame();
-			endGame(backgroundFrame, chessPieces);
+			endGame(initialFrame, chessPieces);
 			break;
 		}
 	}

@@ -10,14 +10,6 @@ MyVideoCapture::MyVideoCapture(int sourceOption) {
 	inputVideo.open(source);
 }
 
-void MyVideoCapture::getInitialFrame() {
-	if (!inputVideo.isOpened())
-		stop = true;
-	else {
-		inputVideo.read(initialFrame);
-	}
-}
-
 void MyVideoCapture::getFrame() {
 	if (!inputVideo.isOpened())
 		stop = true;
@@ -26,15 +18,6 @@ void MyVideoCapture::getFrame() {
 
 	if (stop)
 		inputVideo.release();
-}
-
-void MyVideoCapture::showFrame() {
-	imshow("Output", frame);
-
-	char key = (char)waitKey(20);
-	if (key == 27) {
-		stop = true;
-	}
 }
 
 void MyVideoCapture::beginTimer() {
@@ -48,10 +31,12 @@ void MyVideoCapture::updateFPS() {
 }
 
 void MyVideoCapture::printFPS(Mat& image) {
+	// Trunca o valor em fps para mostrar no frame atual só com 2 casas decimais 
 	double framesPerSecond = fps;
 	framesPerSecond *= 100;
 	framesPerSecond = trunc(framesPerSecond);
 	framesPerSecond /= 100;
+
 	ostringstream convert;
 	convert << "FPS: " << framesPerSecond;
 	putText(image, convert.str(), Point2f(15, 20), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 0), 1, LINE_AA);
