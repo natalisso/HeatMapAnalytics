@@ -1,0 +1,9 @@
+﻿  MyMarkers.cpp
+c:\users\natal\onedrive\documents\visual studio 2017\projects\voxar\voxar\mymarkers.cpp(38): warning C4244: '=': conversão de 'double' para '_Tp', possível perda de dados
+          with
+          [
+              _Tp=float
+          ]
+  main.cpp
+  Gerando Código...
+  Voxar.vcxproj -> C:\Users\natal\OneDrive\Documents\Visual Studio 2017\Projects\Voxar\x64\Debug\Voxar.exe
